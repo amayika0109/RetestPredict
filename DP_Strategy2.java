@@ -5,11 +5,10 @@ public class DP_Strategy2 {
 	  
     public static void main(String args[])  
     {
-    	Calculate2 cal = new Calculate2(30, 10);
+    	Calculate2 cal = new Calculate2(50, 15);
     	cal.check(new SubAlgorithmStrategy2());
     	cal.check(new AddAlgorithmStrategy2());    	
     }
-
 
 }
 
@@ -48,7 +47,7 @@ class SubAlgorithmStrategy2 implements AlgorithmStrategy2 {
 
 class Calculate2 {
 
-	//List of items
+
 	int n1;
 	int n2;
 	
