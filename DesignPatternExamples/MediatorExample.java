@@ -1,20 +1,13 @@
-import java.io.*;
-
 public class MediatorExample{
  
     public static void main(String args[])  
     { 
   
         WSMediator wsMediator = new WSMediator(); 
-        TMRSColleague tmrs = new TMRSColleague(wsMediator); 
         LobetoColleague lobeto = new LobetoColleague(wsMediator); 
         LotRetestColleague lotretest = new LotRetestColleague(wsMediator); 
-        wsMediator.registerTMRS(tmrs); 
-        wsMediator.registerLobeto(lobeto); 
-        wsMediator.registerLotRetest(lotretest);
-        //tmrs.getReady(); 
-        //lobeto.readyColleagues(); 
-        //tmrs.readyColleagues(); 
+        wsMediator.registerAppColleague(lobeto); 
+        wsMediator.registerAppColleague(lotretest);
         lobeto.getReady(); 
         lotretest.readyColleagues(); 
         lobeto.readyColleagues(); 
@@ -23,33 +16,18 @@ public class MediatorExample{
 }
 
 interface  IMediator{
-    public void registerTMRS(TMRSColleague tmrs);
-    public void registerLobeto(LobetoColleague lobeto);
-    public void registerLotRetest(LotRetestColleague lotretest);
+    public void registerAppColleague(Colleague colleague1);
     public boolean isOk(); 
     public void setStatus(boolean status);
 }
 
 class WSMediator implements IMediator{
-    private TMRSColleague tmrs1;
-    private LobetoColleague lobeto1;
-    private LotRetestColleague lotretest1;
+    private Colleague colleague;
     public boolean ready;
     
-    public void registerTMRS(TMRSColleague tmrs)
+    public void registerAppColleague(Colleague colleague1)
     {
-        this.tmrs1 = tmrs;
-    }
-    
-    
-    public void registerLobeto(LobetoColleague lobeto)
-    {
-        this.lobeto1 = lobeto;
-    }
-    
-    public void registerLotRetest(LotRetestColleague lotretest)
-    {
-        this.lotretest1 = lotretest;
+        this.colleague = colleague1;
     }
     
     public boolean isOk()
@@ -69,10 +47,10 @@ interface Colleague{
 }
 
 class TMRSColleague implements Colleague{
-    private WSMediator mediator1;
+    private WSMediator wsmediator;
     
     public TMRSColleague(WSMediator mediator){
-        this.mediator1 = mediator;
+        this.wsmediator = mediator;
         
     }
     public void readyColleagues(){
